@@ -1,7 +1,34 @@
 {
   "products": [
     {
-      "id": "4",
+      "id": 1,
+      "name": "Wireless Headphones",
+      "price": 79.99,
+      "category": "Electronics",
+      "stock": 45,
+      "description": "High quality wireless headphones with noise cancellation and 30hr battery life.",
+      "image": "https://via.placeholder.com/300x200?text=Headphones"
+    },
+    {
+      "id": 2,
+      "name": "Running Shoes",
+      "price": 119.99,
+      "category": "Footwear",
+      "stock": 30,
+      "description": "Lightweight and durable running shoes perfect for all terrains.",
+      "image": "https://via.placeholder.com/300x200?text=Shoes"
+    },
+    {
+      "id": 3,
+      "name": "Coffee Maker",
+      "price": 49.99,
+      "category": "Kitchen",
+      "stock": 20,
+      "description": "12-cup programmable coffee maker with built-in grinder.",
+      "image": "https://via.placeholder.com/300x200?text=Coffee+Maker"
+    },
+    {
+      "id": 4,
       "name": "Yoga Mat",
       "price": 29.99,
       "category": "Sports",
@@ -10,7 +37,7 @@
       "image": "https://via.placeholder.com/300x200?text=Yoga+Mat"
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "Desk Lamp",
       "price": 34.99,
       "category": "Home",
@@ -18,6 +45,5 @@
       "description": "LED desk lamp with adjustable brightness and USB charging port.",
       "image": "https://via.placeholder.com/300x200?text=Desk+Lamp"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
