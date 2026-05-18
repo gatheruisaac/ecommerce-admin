@@ -1,15 +1,17 @@
-function Navbar() {
+const Navbar = () => {
   return (
-    <nav
-      style={{
-        background: "#111827",
-        color: "white",
-        padding: "1rem",
-      }}
-    >
-      <h2>Ecommerce Admin</h2>
-    </nav>
-  );
+    <div className="bg-white p-4 rounded-lg shadow flex justify-between">
+      <h2 className="text-2xl font-bold">
+        Dashboard
+      </h2>
+
+      <input
+        type="text"
+        placeholder="Search..."
+        className="border p-2 rounded"
+      />
+    </div>
+  )
 }
 
-export default Navbar;
+export default Navbar

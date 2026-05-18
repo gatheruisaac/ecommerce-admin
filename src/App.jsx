@@ -8,15 +8,17 @@ import Dashboard from "./pages/Dashboard";
 import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
 import NotFound from "./pages/NotFound";
+import Home from "./pages/Home";
+// import Admin from "./pages/Admin";
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={<Dashboard />}
-        />
+
+        <Route path="/" element={<Home />} />
+
 
         <Route
           path="/products"
