@@ -1,16 +1,11 @@
 import Sidebar from "../components/Sidebar"
-import Navbar from "../components/Navbar"
 import Hero from "../components/Hero"
 
 const Home = () => {
   return (
-    <div className="flex">
+    <div className="flex flex-col min-h-screen">
       <Sidebar />
-
-      <div className="flex-1 p-6">
-        <Navbar />
-        <Hero />
-      </div>
+      <Hero />
     </div>
   )
 }

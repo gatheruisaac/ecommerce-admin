@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Sidebar from "../components/Sidebar"
-import Navbar from "../components/Navbar"
+// import Navbar from "../components/Navbar"
 import ProductCard from "../components/ProductCard"
 
 const Products = () => {
@@ -116,147 +116,41 @@ const Products = () => {
   )
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Main Content */}
-      <div className="flex-1 p-6">
-        {/* Navbar */}
-        <Navbar />
-
-        {/* Page Heading */}
-        <div className="mt-6">
-          <h1 className="text-3xl font-bold text-gray-800">
-            Products
-          </h1>
-
-          <p className="text-gray-500 mt-2">
-            Manage all coffee products here.
-          </p>
-        </div>
-
-        {/* Search Bar */}
-        <div className="mt-6">
-          <input
-            type="text"
-            placeholder="Search for a product..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full p-3 border rounded-lg shadow-sm"
-          />
-        </div>
-
-        {/* Add Product Form */}
-        <form
-          onSubmit={handleAddProduct}
-          className="bg-white p-6 rounded-xl shadow mt-6"
-        >
-          <h2 className="text-2xl font-bold mb-4">
-            Add New Product
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <input
-              type="text"
-              name="name"
-              placeholder="Product Name"
-              value={newProduct.name}
-              onChange={handleChange}
-              className="p-3 border rounded-lg"
-              required
-            />
-
-            <input
-              type="number"
-              name="price"
-              placeholder="Price"
-              value={newProduct.price}
-              onChange={handleChange}
-              className="p-3 border rounded-lg"
-              required
-            />
-
-            <input
-              type="text"
-              name="image"
-              placeholder="Image URL"
-              value={newProduct.image}
-              onChange={handleChange}
-              className="p-3 border rounded-lg"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="mt-4 bg-[#1f3a2e] text-white px-6 py-3 rounded-lg"
-          >
-            Add Product
-          </button>
-        </form>
-
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-xl shadow overflow-hidden"
-            >
-              {/* Product Image */}
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-56 object-cover"
-              />
-
-              {/* Product Details */}
-              <div className="p-4">
-                <h2 className="text-xl font-bold">
-                  {product.name}
-                </h2>
-
-                <p className="text-gray-600 mt-2">
-                  ${product.price}
-                </p>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3 mt-4">
-                  <button
-                    onClick={() =>
-                      handlePriceUpdate(
-                        product.id,
-                        product.price
-                      )
-                    }
-                    className="bg-yellow-500 text-white px-4 py-2 rounded-lg"
-                  >
-                    Update Price
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      handleDelete(product.id)
-                    }
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {filteredProducts.length === 0 && (
-          <div className="text-center mt-10">
-            <p className="text-gray-500 text-lg">
-              No products found.
-            </p>
-          </div>
-        )}
+  <div className="flex flex-col min-h-screen bg-[#a08060]">
+       <Sidebar />
+    <div className="flex flex-1">
+      {/* Left filter sidebar */}
+      <div className="w-48 p-6 flex flex-col gap-4">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="p-2 rounded-full border text-sm"
+        />
+        <p className="text-white text-sm mt-2">● Location 1</p>
+        <p className="text-white text-sm">● Location 2</p>
+        <p className="text-white text-sm">● Location 3</p>
+        <p className="text-white text-sm">● Location 4</p>
       </div>
+
+      {/* Products grid */}
+      <div className="flex-1 p-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+        {filteredProducts.map((product) => (
+          <div key={product.id} className="bg-white rounded-xl shadow p-4">
+            <img src={product.image} alt={product.name} className="w-full h-32 object-cover rounded mb-2" />
+            <h2 className="font-bold">{product.name}</h2>
+            <p className="text-sm text-gray-500">{product.description}</p>
+            <p className="text-sm text-gray-500">{product.origin}</p>
+            <p className="text-sm font-semibold">${product.price}</p>
+            <div className="flex gap-2 mt-3">
+              <button onClick={() => handlePriceUpdate(product.id, product.price)} className="bg-yellow-500 text-white text-xs px-3 py-1 rounded-lg">Update Price</button>
+              <button onClick={() => handleDelete(product.id)} className="bg-red-500 text-white text-xs px-3 py-1 rounded-lg">Delete</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
     </div>
   )
 }

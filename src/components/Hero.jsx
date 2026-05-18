@@ -1,13 +1,8 @@
 const Hero = () => {
   return (
-    <div className="bg-[#d7b899] p-10 rounded-xl text-white mt-6">
-      <h1 className="text-4xl font-bold">
-        Welcome to Coffee R Us
-      </h1>
-
-      <p className="mt-4 text-lg">
-        Manage products and monitor inventory.
-      </p>
+    <div className="bg-[#7d6147] flex flex-col items-center justify-center text-white text-center py-40 px-6">
+      <h1 className="text-6xl font-bold">Coffee R Us</h1>
+      <p className="mt-4 text-xl">The go to store for your coffee needs</p>
     </div>
   )
 }

@@ -9,7 +9,7 @@ import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
-// import Admin from "./pages/Admin";
+import Admin from "./pages/Admin";
 
 
 function App() {
@@ -33,7 +33,14 @@ function App() {
         <Route
           path="*"
           element={<NotFound />}
-        />
+          
+          />
+
+
+        <Route
+          path="/admin" element={<Admin />} />
+
+        
       </Routes>
     </BrowserRouter>
   );
