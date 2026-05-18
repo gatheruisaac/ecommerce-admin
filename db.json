@@ -7,8 +7,7 @@
       "category": "Sports",
       "stock": 60,
       "description": "Eco-friendly non-slip yoga mat, 6mm thick for extra comfort.",
-      // "image": "https://via.placeholder.com/300x200?text=Yoga+Mat"
-      "image": "https://images.unsplash.com/photo-1594737625785-9b1c8e1a2f0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8eW9nYSUyMG1hdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+      "image": "https://via.placeholder.com/300x200?text=Yoga+Mat"
     },
     {
       "id": "5",
@@ -17,8 +16,7 @@
       "category": "Home",
       "stock": 25,
       "description": "LED desk lamp with adjustable brightness and USB charging port.",
-      // "image": "https://via.placeholder.com/300x200?text=Desk+Lamp"
-      "image" : "https://www.google.com/imgres?q=free%20desk%20lamp%20stock%20image&imgurl=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F31410610%2Fpexels-photo-31410610.jpeg%3Fcs%3Dsrgb%26dl%3Dpexels-pu-ca-adryan-163345030-31410610.jpg%26fm%3Djpg&imgrefurl=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Ftable%2520lamp%2F&docid=XQfBII0ghqaWoM&tbnid=mmNwzwp9MXfQpM&vet=12ahUKEwio3pXgycOUAxUB9LsIHRJYKHYQnPAOegQIHxAB..i&w=3150&h=3150&hcb=2&ved=2ahUKEwio3pXgycOUAxUB9LsIHRJYKHYQnPAOegQIHxAB"
+      "image": "https://via.placeholder.com/300x200?text=Desk+Lamp"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
