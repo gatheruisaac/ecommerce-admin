@@ -61,42 +61,42 @@ Example Product Data
     
 Project Structure
 src
-├── App.css
-├── App.jsx
-├── assets
-│   ├── hero.png
-│   ├── react.svg
-│   └── vite.svg
-├── components
-│   ├── Hero.jsx
-│   ├── Navbar.css
-│   ├── Navbar.jsx
-│   ├── ProductCard.jsx
-│   ├── ProductForm.css
-│   ├── ProductForm.jsx
-│   ├── SearchBar.jsx
-│   └── Sidebar.jsx
-├── hooks
-│   └── useProducts.js
-├── index.css
-├── main.jsx
-├── pages
-│   ├── AddProduct.jsx
-│   ├── Admin.jsx
-│   ├── Dashboard.jsx
-│   ├── Home.css
-│   ├── Home.jsx
-│   ├── NotFound.jsx
-│   └── Products.jsx
-├── services
-│   └── api.js
-├── styles
-│   ├── api.js
-│   └── global.css
-└── tests
-    ├── Navbar.test.jsx
-    ├── Products.test.jsx
-    └── useProducts.test.jsx
+├── App.css  
+├── App.jsx  
+├── assets  
+│   ├── hero.png  
+│   ├── react.svg  
+│   └── vite.svg  
+├── components  
+│   ├── Hero.jsx  
+│   ├── Navbar.css  
+│   ├── Navbar.jsx  
+│   ├── ProductCard.jsx  
+│   ├── ProductForm.css  
+│   ├── ProductForm.jsx  
+│   ├── SearchBar.jsx  
+│   └── Sidebar.jsx  
+├── hooks  
+│   └── useProducts.js  
+├── index.css  
+├── main.jsx  
+├── pages  
+│   ├── AddProduct.jsx  
+│   ├── Admin.jsx  
+│   ├── Dashboard.jsx  
+│   ├── Home.css  
+│   ├── Home.jsx  
+│   ├── NotFound.jsx  
+│   └── Products.jsx  
+├── services  
+│   └── api.js  
+├── styles  
+│   ├── api.js  
+│   └── global.css  
+└── tests  
+    ├── Navbar.test.jsx  
+    ├── Products.test.jsx  
+    └── useProducts.test.jsx  
 Tailwind Setup
 
 Install Tailwind CSS:
