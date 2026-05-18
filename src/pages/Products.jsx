@@ -87,9 +87,9 @@ const Products = () => {
             className="px-3 py-1.5 rounded-full border border-[#c4a882] bg-[#c4a882] text-white placeholder-white text-sm focus:outline-none"
           />
 
-          <div className="flex flex-col gap-2 mt-1">
+          <div className="flex flex-col gap-2 mt-1 ">
             {["Location 1", "Location 2", "Location 3", "Location 4"].map((loc) => (
-              <label key={loc} className="flex items-center gap-2 text-white text-sm cursor-pointer">
+              <label key={loc}x className="flex items-center gap-2 text-white text-sm cursor-pointer ">
                 <input
                   type="checkbox"
                   className="w-3.5 h-3.5 accent-white rounded-sm"
