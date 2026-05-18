@@ -1,28 +1,19 @@
 import { useEffect, useState } from "react"
 import Sidebar from "../components/Sidebar"
-// import Navbar from "../components/Navbar"
-import ProductCard from "../components/ProductCard"
 
 const Products = () => {
-  // State to store all products from the backend
   const [products, setProducts] = useState([])
-
-  // State for search input
   const [searchTerm, setSearchTerm] = useState("")
-
-  // State for form inputs when adding a new product
   const [newProduct, setNewProduct] = useState({
     name: "",
     price: "",
     image: "",
   })
 
-  // Fetch products when component loads
   useEffect(() => {
     fetchProducts()
   }, [])
 
-  // Function to fetch all products
   const fetchProducts = () => {
     fetch("http://localhost:3001/products")
       .then((res) => res.json())
@@ -30,7 +21,6 @@ const Products = () => {
       .catch((error) => console.error("Error fetching products:", error))
   }
 
-  // Handle form input changes
   const handleChange = (e) => {
     setNewProduct({
       ...newProduct,
@@ -38,15 +28,11 @@ const Products = () => {
     })
   }
 
-  // Add new product
   const handleAddProduct = (e) => {
     e.preventDefault()
-
     fetch("http://localhost:3001/products", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...newProduct,
         price: Number(newProduct.price),
@@ -55,102 +41,114 @@ const Products = () => {
       .then((res) => res.json())
       .then((data) => {
         setProducts([...products, data])
-
-        // Reset form after adding product
-        setNewProduct({
-          name: "",
-          price: "",
-          image: "",
-        })
+        setNewProduct({ name: "", price: "", image: "" })
       })
       .catch((error) => console.error("Error adding product:", error))
   }
 
-  // Delete product
   const handleDelete = (id) => {
-    fetch(`http://localhost:3001/products/${id}`, {
-      method: "DELETE",
-    })
-      .then(() => {
-        const updatedProducts = products.filter(
-          (product) => product.id !== id
-        )
-
-        setProducts(updatedProducts)
-      })
+    fetch(`http://localhost:3001/products/${id}`, { method: "DELETE" })
+      .then(() => setProducts(products.filter((p) => p.id !== id)))
       .catch((error) => console.error("Error deleting product:", error))
   }
 
-  // Update product price
   const handlePriceUpdate = (id, currentPrice) => {
-    const updatedPrice = prompt(
-      "Enter new price:",
-      currentPrice
-    )
-
+    const updatedPrice = prompt("Enter new price:", currentPrice)
     if (!updatedPrice) return
 
     fetch(`http://localhost:3001/products/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        price: Number(updatedPrice),
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ price: Number(updatedPrice) }),
     })
       .then((res) => res.json())
       .then((updatedProduct) => {
-        const updatedProducts = products.map((product) =>
-          product.id === id ? updatedProduct : product
-        )
-
-        setProducts(updatedProducts)
+        setProducts(products.map((p) => (p.id === id ? updatedProduct : p)))
       })
       .catch((error) => console.error("Error updating price:", error))
   }
 
-  // Filter products based on search
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   return (
-  <div className="flex flex-col min-h-screen bg-[#a08060]">
-       <Sidebar />
-    <div className="flex flex-1">
-      {/* Left filter sidebar */}
-      <div className="w-48 p-6 flex flex-col gap-4">
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 rounded-full border text-sm"
-        />
-        <p className="text-white text-sm mt-2">● Location 1</p>
-        <p className="text-white text-sm">● Location 2</p>
-        <p className="text-white text-sm">● Location 3</p>
-        <p className="text-white text-sm">● Location 4</p>
-      </div>
+    <div className="flex flex-col min-h-screen bg-[#a08060]">
+      <Sidebar />
 
-      {/* Products grid */}
-      <div className="flex-1 p-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {filteredProducts.map((product) => (
-          <div key={product.id} className="bg-white rounded-xl shadow p-4">
-            <img src={product.image} alt={product.name} className="w-full h-32 object-cover rounded mb-2" />
-            <h2 className="font-bold">{product.name}</h2>
-            <p className="text-sm text-gray-500">{product.description}</p>
-            <p className="text-sm text-gray-500">{product.origin}</p>
-            <p className="text-sm font-semibold">${product.price}</p>
-            <div className="flex gap-2 mt-3">
-              <button onClick={() => handlePriceUpdate(product.id, product.price)} className="bg-yellow-500 text-white text-xs px-3 py-1 rounded-lg">Update Price</button>
-              <button onClick={() => handleDelete(product.id)} className="bg-red-500 text-white text-xs px-3 py-1 rounded-lg">Delete</button>
-            </div>
+      <div className="flex flex-1">
+        {/* Left filter sidebar */}
+        <div className="w-44 px-4 pt-5 flex flex-col gap-3 shrink-0">
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="px-3 py-1.5 rounded-full border border-[#c4a882] bg-[#c4a882] text-white placeholder-white text-sm focus:outline-none"
+          />
+
+          <div className="flex flex-col gap-2 mt-1">
+            {["Location 1", "Location 2", "Location 3", "Location 4"].map((loc) => (
+              <label key={loc} className="flex items-center gap-2 text-white text-sm cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="w-3.5 h-3.5 accent-white rounded-sm"
+                />
+                {loc}
+              </label>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* Products grid */}
+        <div className="flex-1 p-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+          {filteredProducts.map((product) => (
+            <div
+              key={product.id}
+              className="relative rounded-2xl overflow-hidden shadow-md aspect-[3/4] group"
+              style={{ minHeight: "220px" }}
+            >
+              {/* Background image */}
+              <img
+                src={product.image}
+                alt={product.name}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+
+              {/* Dark gradient overlay at bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+              {/* Text content on top of image */}
+              <div className="absolute inset-0 flex flex-col justify-end p-3 text-white">
+                <h2 className="font-semibold text-sm leading-tight mb-0.5">
+                  {product.name}
+                </h2>
+                <p className="text-xs opacity-80 leading-tight mb-0.5 line-clamp-1">
+                  {product.description}
+                </p>
+                <p className="text-xs opacity-70 mb-0.5">{product.origin}</p>
+                <p className="text-sm font-bold">${product.price}</p>
+
+                {/* Action buttons - shown on hover */}
+                <div className="flex gap-1.5 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <button
+                    onClick={() => handlePriceUpdate(product.id, product.price)}
+                    className="bg-yellow-500/90 hover:bg-yellow-500 text-white text-xs px-2.5 py-1 rounded-lg transition-colors"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={() => handleDelete(product.id)}
+                    className="bg-red-500/90 hover:bg-red-500 text-white text-xs px-2.5 py-1 rounded-lg transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     </div>
   )
 }
