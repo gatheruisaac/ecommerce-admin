@@ -1,37 +1,37 @@
 This is the Summative Lab: Building a React-Based Personal Project Showcase App
 
-Coffee Store Admin Dashboard
+# Coffee Store Admin Dashboard
 
-A modern React + Tailwind CSS ecommerce admin dashboard for managing products.
+## A modern React + Tailwind CSS ecommerce admin dashboard for managing products.
 
-Features
-View products
-Search products
-Add new products
-Update product prices
-Delete products
-Responsive product grid
-Sidebar navigation
-Styled with Tailwind CSS
-Mock backend using JSON Server
-Tech Stack
-React
-Vite
-Tailwind CSS
-JSON Server
-Installation
+### Features
+* View products
+* Search products
+* Add new products
+* Update product prices
+* Delete products
+* Responsive product grid
+* Sidebar navigation
+* Styled with Tailwind CSS
+* Mock backend using JSON Server
+* Tech Stack
+* React
+* Vite
+* Tailwind CSS
+* JSON Server
+* Installation
 
-Clone the repository:
+#### Clone the repository:
 
 git clone https://github.com/gatheruisaac/ecommerce-admin.git
 cd ./src
 
-Install dependencies:
+#### Install dependencies:
 
 npm install
 Start Development Server
 
-Run the React app:
+#### Run the React app:
 
 npm run dev
 Start JSON Server
@@ -59,7 +59,7 @@ Example Product Data
     ...
 
     
-Project Structure
+## Project Structure
 src
 ├── App.css  
 ├── App.jsx  
@@ -97,9 +97,11 @@ src
     ├── Navbar.test.jsx  
     ├── Products.test.jsx  
     └── useProducts.test.jsx  
-Tailwind Setup
 
-Install Tailwind CSS:
+
+## Tailwind Setup
+
+# Install Tailwind CSS:
 
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
