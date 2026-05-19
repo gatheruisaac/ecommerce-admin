@@ -1,0 +1,85 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Ethiopian Yirgacheffe",
+      "price": 18.99,
+      "category": "Single Origin",
+      "stock": 40,
+      "description": "Bright & floral with notes of jasmine and bergamot",
+      "origin": "Ethiopia",
+      "image": "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "2",
+      "name": "Colombian Supremo",
+      "price": 15.99,
+      "category": "Single Origin",
+      "stock": 55,
+      "description": "Smooth & balanced with caramel and red fruit notes",
+      "origin": "Colombia",
+      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "3",
+      "name": "Sumatra Mandheling",
+      "price": 9879,
+      "category": "Single Origin",
+      "stock": 30,
+      "description": "Earthy & full-bodied with dark chocolate undertones",
+      "origin": "Indonesia",
+      "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "4",
+      "name": "Guatemala Antigua",
+      "price": 16.49,
+      "category": "Single Origin",
+      "stock": 45,
+      "description": "Rich & spicy with hints of cocoa and smoky finish",
+      "origin": "Guatemala",
+      "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "5",
+      "name": "Kenya AA",
+      "price": 21.99,
+      "category": "Single Origin",
+      "stock": 25,
+      "description": "Bright & winey with blackcurrant and citrus zest",
+      "origin": "Kenya",
+      "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "6",
+      "name": "Brazil Santos",
+      "price": 13.99,
+      "category": "Blend",
+      "stock": 60,
+      "description": "Nutty & low-acid with sweet almond and milk chocolate",
+      "origin": "Brazil",
+      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "7",
+      "name": "House Espresso Blend",
+      "price": 14.99,
+      "category": "Blend",
+      "stock": 70,
+      "description": "Bold & creamy with a thick crema and dark toffee notes",
+      "origin": "Multi-origin",
+      "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "8",
+      "name": "Costa Rica Tarrazu",
+      "price": 19.49,
+      "category": "Single Origin",
+      "stock": 35,
+      "description": "Clean & bright with honey sweetness and peach finish",
+      "origin": "Costa Rica",
+      "image": "https://images.unsplash.com/photo-1486695048071-2c5c24a867f8?auto=format&fit=crop&w=600&q=80"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
