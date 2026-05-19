@@ -15,7 +15,7 @@ const Products = () => {
   }, [])
 
   const fetchProducts = () => {
-    fetch("https://ecommerce-admin-1mqw.onrender.com:1000")
+    fetch("https://ecommerce-admin-1mqw.onrender.com/products")
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error))
@@ -30,7 +30,7 @@ const Products = () => {
 
   const handleAddProduct = (e) => {
     e.preventDefault()
-    fetch("https://ecommerce-admin-1mqw.onrender.com:1000", {
+    fetch("https://ecommerce-admin-1mqw.onrender.com/products", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -47,7 +47,7 @@ const Products = () => {
   }
 
   const handleDelete = (id) => {
-    fetch(`https://ecommerce-admin-1mqw.onrender.com:1000/${id}`, { method: "DELETE" })
+    fetch(`https://ecommerce-admin-1mqw.onrender.com/products/${id}`, { method: "DELETE" })
       .then(() => setProducts(products.filter((p) => p.id !== id)))
       .catch((error) => console.error("Error deleting product:", error))
   }
@@ -56,7 +56,7 @@ const Products = () => {
     const updatedPrice = prompt("Enter new price:", currentPrice)
     if (!updatedPrice) return
 
-    fetch(`https://ecommerce-admin-1mqw.onrender.com:1000:1000/${id}`, {
+    fetch(`https://ecommerce-admin-1mqw.onrender.com/products/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price: Number(updatedPrice) }),
