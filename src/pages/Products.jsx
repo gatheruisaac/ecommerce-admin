@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Sidebar from "../components/Sidebar"
+import API from "../services/api"
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -14,13 +15,17 @@ const Products = () => {
     fetchProducts()
   }, [])
 
-  const fetchProducts = () => {
-    fetch("https://ecommerce-admin-1mqw.onrender.com/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error("Error fetching products:", error))
+  // GET PRODUCTS
+  const fetchProducts = async () => {
+    try {
+      const response = await API.get("/products")
+      setProducts(response.data)
+    } catch (error) {
+      console.error("Error fetching products:", error)
+    }
   }
 
+  // HANDLE FORM INPUTS
   const handleChange = (e) => {
     setNewProduct({
       ...newProduct,
@@ -28,46 +33,61 @@ const Products = () => {
     })
   }
 
-  const handleAddProduct = (e) => {
+  // ADD PRODUCT
+  const handleAddProduct = async (e) => {
     e.preventDefault()
-    fetch("https://ecommerce-admin-1mqw.onrender.com/products", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+
+    try {
+      const response = await API.post("/products", {
         ...newProduct,
         price: Number(newProduct.price),
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts([...products, data])
-        setNewProduct({ name: "", price: "", image: "" })
       })
-      .catch((error) => console.error("Error adding product:", error))
+
+      setProducts([...products, response.data])
+
+      setNewProduct({
+        name: "",
+        price: "",
+        image: "",
+      })
+    } catch (error) {
+      console.error("Error adding product:", error)
+    }
   }
 
-  const handleDelete = (id) => {
-    fetch(`https://ecommerce-admin-1mqw.onrender.com/products/${id}`, { method: "DELETE" })
-      .then(() => setProducts(products.filter((p) => p.id !== id)))
-      .catch((error) => console.error("Error deleting product:", error))
+  // DELETE PRODUCT
+  const handleDelete = async (id) => {
+    try {
+      await API.delete(`/products/${id}`)
+
+      setProducts(products.filter((p) => p.id !== id))
+    } catch (error) {
+      console.error("Error deleting product:", error)
+    }
   }
 
-  const handlePriceUpdate = (id, currentPrice) => {
+  // UPDATE PRICE
+  const handlePriceUpdate = async (id, currentPrice) => {
     const updatedPrice = prompt("Enter new price:", currentPrice)
+
     if (!updatedPrice) return
 
-    fetch(`https://ecommerce-admin-1mqw.onrender.com/products/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ price: Number(updatedPrice) }),
-    })
-      .then((res) => res.json())
-      .then((updatedProduct) => {
-        setProducts(products.map((p) => (p.id === id ? updatedProduct : p)))
+    try {
+      const response = await API.patch(`/products/${id}`, {
+        price: Number(updatedPrice),
       })
-      .catch((error) => console.error("Error updating price:", error))
+
+      setProducts(
+        products.map((p) =>
+          p.id === id ? response.data : p
+        )
+      )
+    } catch (error) {
+      console.error("Error updating price:", error)
+    }
   }
 
+  // SEARCH
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
@@ -77,19 +97,24 @@ const Products = () => {
       <Sidebar />
 
       <div className="flex flex-1">
-        {/* Left filter sidebar */}
+
+        {/* LEFT SIDEBAR */}
         <div className="w-44 px-4 pt-5 flex flex-col gap-3 shrink-0">
+
           <input
             type="text"
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-3 py-1.5 rounded-full border border-[#c4a882] bg-[#c4a882] text-white placeholder-white text-sm focus:outline-none"
+            className="px-3 py-2 rounded-full border border-[#c4a882] bg-[#c4a882] text-white placeholder-white text-sm focus:outline-none"
           />
 
-          <div className="flex flex-col gap-2 mt-1 ">
+          <div className="flex flex-col gap-2 mt-1">
             {["Location 1", "Location 2", "Location 3", "Location 4"].map((loc) => (
-              <label key={loc}x className="flex items-center gap-2 text-white text-sm cursor-pointer ">
+              <label
+                key={loc}
+                className="flex items-center gap-2 text-white text-sm cursor-pointer"
+              >
                 <input
                   type="checkbox"
                   className="w-3.5 h-3.5 accent-white rounded-sm"
@@ -98,51 +123,104 @@ const Products = () => {
               </label>
             ))}
           </div>
+
+          {/* ADD PRODUCT FORM */}
+          <form
+            onSubmit={handleAddProduct}
+            className="flex flex-col gap-2 mt-4"
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Product Name"
+              value={newProduct.name}
+              onChange={handleChange}
+              className="p-2 rounded text-sm bg-white"
+              required
+            />
+
+            <input
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={newProduct.price}
+              onChange={handleChange}
+              className="p-2 rounded text-sm bg-white"
+              required
+            />
+
+            <input
+              type="text"
+              name="image"
+              placeholder="Image URL"
+              value={newProduct.image}
+              onChange={handleChange}
+              className="p-2 rounded text-sm bg-white"
+              required
+            />
+
+            <button
+              type="submit"
+              className="bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition"
+            >
+              Add Product
+            </button>
+          </form>
         </div>
 
-        {/* Products grid */}
+        {/* PRODUCTS GRID */}
         <div className="flex-1 p-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+
           {filteredProducts.map((product) => (
             <div
               key={product.id}
               className="relative rounded-2xl overflow-hidden shadow-md aspect-[3/4] group"
-              style={{ minHeight: "220px" }}
             >
-              {/* Background image */}
               <img
                 src={product.image}
                 alt={product.name}
                 className="absolute inset-0 w-full h-full object-cover"
               />
 
-              {/* Dark gradient overlay at bottom */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
-              {/* Text content on top of image */}
               <div className="absolute inset-0 flex flex-col justify-end p-3 text-white">
-                <h2 className="font-semibold text-sm leading-tight mb-0.5">
+
+                <h2 className="font-semibold text-sm">
                   {product.name}
                 </h2>
-                <p className="text-xs opacity-80 leading-tight mb-0.5 line-clamp-1">
+
+                <p className="text-xs opacity-80 line-clamp-1">
                   {product.description}
                 </p>
-                <p className="text-xs opacity-70 mb-0.5">{product.origin}</p>
-                <p className="text-sm font-bold">${product.price}</p>
 
-                {/* Action buttons - shown on hover */}
-                <div className="flex gap-1.5 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <p className="text-xs opacity-70">
+                  {product.origin}
+                </p>
+
+                <p className="text-sm font-bold">
+                  ${product.price}
+                </p>
+
+                {/* BUTTONS */}
+                <div className="flex gap-2 mt-2 opacity-0 group-hover:opacity-100 transition">
+
                   <button
-                    onClick={() => handlePriceUpdate(product.id, product.price)}
-                    className="bg-yellow-500/90 hover:bg-yellow-500 text-white text-xs px-2.5 py-1 rounded-lg transition-colors"
+                    onClick={() =>
+                      handlePriceUpdate(product.id, product.price)
+                    }
+                    className="bg-yellow-500 text-white text-xs px-3 py-1 rounded-lg"
                   >
                     Update
                   </button>
+
                   <button
                     onClick={() => handleDelete(product.id)}
-                    className="bg-red-500/90 hover:bg-red-500 text-white text-xs px-2.5 py-1 rounded-lg transition-colors"
+                    className="bg-red-500 text-white text-xs px-3 py-1 rounded-lg"
                   >
                     Delete
                   </button>
+
                 </div>
               </div>
             </div>
